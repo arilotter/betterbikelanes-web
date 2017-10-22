@@ -34,7 +34,8 @@ export default class App extends Component {
             ({ time }) => new Date().getTime() - time < 10000
           )
         };
-        const test = s.sensors.filter(s => s.uuid === "test");
+        console.log(s.sensors);
+        const test = s.sensors.filter(s => s.uuid === "xxx1");
         if (test.length === 1) {
           s.traffic = test[0].count > 0;
         }

@@ -31,13 +31,13 @@ app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 app.post("/triggered", (req, res) => {
   if (req.body.demo) {
     // fake for demo
-    [lat, lon] = req.body.demo;
+    [lat, lng] = req.body.demo;
     if (database.sensors[req.body.uuid] === undefined) {
       database.sensors[req.body.uuid] = {
         readings: [],
         location: {
           lat,
-          lon
+          lng
         }
       };
     }
