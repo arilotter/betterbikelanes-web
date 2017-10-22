@@ -1,33 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
+import React from "react";
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-  },
-});
-
-function SimpleAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography type="title" color="inherit">
-            Bike Thing
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-}
-
-SimpleAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SimpleAppBar);
+export default _ => <div className="appBar" style={{
+  width: '100vw',
+  height: '64px',
+  fontSize: 32,
+  fontWeight: 'bold',
+  padding: 16,
+  boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+  background: "#F44336",
+  color: 'white'
+}}>betterbikelanes.tech</div>;

@@ -60,7 +60,7 @@ app.post("/networks", (req, res) => {
     });
 });
 
-app.get("/", (req, res) => {
+app.get("/database", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(JSON.stringify(database));
 });

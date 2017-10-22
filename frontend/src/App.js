@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import Map from "./map/Map";
 import "./App.css";
 
-const ENDPOINT = "http://localhost:6969/";
+const ENDPOINT = "/database";
 
 export default class App extends Component {
   constructor() {
