@@ -41,8 +41,8 @@ export default class Normal extends Polyline {
     return {
       geodesic: true,
       strokeColor: this.props.color || "#ffffff",
-      strokeOpacity: 1,
-      strokeWeight: 3.5
+      strokeOpacity: 0.9,
+      strokeWeight: this.props.color === '#2196F3' ? 8 : 5
     };
   }
 }
