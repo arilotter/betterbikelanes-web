@@ -1,5 +1,6 @@
 // seeecret
 const KEY = "AIzaSyCl4kR-p0ieKib-mE4RD7TjQRY6w_MnmyI";
+const PORT = process.env.PORT || 6969;
 
 const fs = require("fs");
 const path = require("path");
@@ -24,6 +25,8 @@ const database = new Proxy(JSON.parse(fs.readFileSync(dbFile)), {
 
 const app = express();
 app.use(bodyParser.json());
+
+app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
 app.post("/triggered", (req, res) => {
   if (database[req.body.uuid] === undefined) {
@@ -65,6 +68,11 @@ app.get("/database", (req, res) => {
   res.send(JSON.stringify(database));
 });
 
-app.listen(6969, () => {
-  console.log("listening on port 6969");
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
 });
