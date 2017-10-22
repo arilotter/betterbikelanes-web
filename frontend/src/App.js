@@ -27,7 +27,9 @@ export default class App extends Component {
             lat: location.lat,
             lng: location.lng,
             count: readings.filter(reading => (new Date().getTime() - reading) < 180000 ).length
-          }))
+          })),
+          hazards: 
+            json.hazards.filter(({time}) => (new Date().getTime() - {time}) < 180000)
         };
         const test = this.s.sensors.filter(s => s.uuid === 'test');
         if(test.length === 1) {
