@@ -24,7 +24,7 @@ export default ({ map, maps, traffic, hazard }) => {
   const pickColor = index => {
     if (traffic || hazard) {
       if (index === 3) {
-        return "red";
+        return "#FFCDD2";
       } else {
         return "#2196F3";
       }

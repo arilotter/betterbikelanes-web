@@ -27,11 +27,11 @@ export default class App extends Component {
             lat: location.lat,
             lng: location.lng,
             count: readings.filter(
-              reading => (new Date().getTime() - reading) < 10000 // 10 minutes
+              reading => (new Date().getTime() - reading) < 30000
             ).length
           })),
           hazards: json.hazards.filter(
-            ({ time }) => new Date().getTime() - time < 10000
+            ({ time }) => new Date().getTime() - time < 15000
           )
         };
         console.log(s.sensors);
