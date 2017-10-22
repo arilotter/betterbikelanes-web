@@ -27,7 +27,7 @@ export default class App extends Component {
             lat: location.lat,
             lng: location.lng,
             count: readings.filter(
-              reading => (new Date().getTime() - reading) < 100000 // 10 minutes
+              reading => (new Date().getTime() - reading) < 10000 // 10 minutes
             ).length
           })),
           hazards: json.hazards.filter(
@@ -35,7 +35,7 @@ export default class App extends Component {
           )
         };
         console.log(s.sensors);
-        const test = s.sensors.filter(s => s.uuid === "xxx1");
+        const test = s.sensors.filter(s => s.uuid === "xxx2");
         if (test.length === 1) {
           s.traffic = test[0].count > 0;
         }
