@@ -29,6 +29,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
 app.post("/triggered", (req, res) => {
+  console.log(req.body)
   if (req.body.demo) {
     // fake for demo
     [lat, lon] = req.body.demo.split(",");
