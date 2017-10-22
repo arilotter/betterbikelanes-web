@@ -29,17 +29,18 @@ app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
 app.post("/triggered", (req, res) => {
-  console.log(req.body)
   if (req.body.demo) {
     // fake for demo
     [lat, lon] = req.body.demo;
-    database.sensors[req.body.uuid] = {
-      readings: [],
-      location: {
-        lat,
-        lon
-      }
-    };
+    if (database.sensors[req.body.uuid] === undefined) {
+      database.sensors[req.body.uuid] = {
+        readings: [],
+        location: {
+          lat,
+          lon
+        }
+      };
+    }
   }
   if (database.sensors[req.body.uuid] === undefined) {
     res.sendStatus(400);

@@ -27,7 +27,7 @@ export default class App extends Component {
             lat: location.lat,
             lng: location.lng,
             count: readings.filter(
-              reading => new Date().getTime() - reading < 10000
+              reading => (new Date().getTime() - reading) < 100000 // 10 minutes
             ).length
           })),
           hazards: json.hazards.filter(
