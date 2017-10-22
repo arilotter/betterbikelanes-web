@@ -37,7 +37,7 @@ export default class App extends Component {
         console.log(s.sensors);
         const test = s.sensors.filter(s => s.uuid === "xxx2");
         if (test.length === 1) {
-          s.traffic = test[0].count > 0;
+          s.traffic = test[0].count > 3;
         }
         console.log(s);
         this.setState(s);
