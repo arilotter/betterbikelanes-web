@@ -32,7 +32,7 @@ app.post("/triggered", (req, res) => {
   console.log(req.body)
   if (req.body.demo) {
     // fake for demo
-    [lat, lon] = req.body.demo.split(",");
+    [lat, lon] = req.body.demo;
     database.sensors[req.body.uuid] = {
       readings: [],
       location: {
