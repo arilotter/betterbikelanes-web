@@ -26,15 +26,19 @@ export default class App extends Component {
             uuid: key,
             lat: location.lat,
             lng: location.lng,
-            count: readings.filter(reading => (new Date().getTime() - reading) < 180000 ).length
+            count: readings.filter(
+              reading => new Date().getTime() - reading < 180000
+            ).length
           })),
-          hazards: 
-            json.hazards.filter(({time}) => (new Date().getTime() - {time}) < 180000)
+          hazards: json.hazards.filter(
+            ({ time }) => new Date().getTime() - time < 180000
+          )
         };
-        const test = this.s.sensors.filter(s => s.uuid === 'test');
-        if(test.length === 1) {
+        const test = s.sensors.filter(s => s.uuid === "test");
+        if (test.length === 1) {
           s.traffic = test[0].count > 0;
         }
+        console.log(s);
         this.setState(s);
       });
   }

@@ -14,12 +14,11 @@ const style = {
 
   border: "5px solid #B71C1C",
   borderRadius: K_HEIGHT,
-  backgroundColor: "#F44336",
+  backgroundColor: "white",
   textAlign: "center",
-  color: "#3f51b5",
-  fontSize: 16,
+  color: "#F44336",
+  fontSize: 24,
   fontWeight: "bold",
-  padding: "4px"
 };
 
-export default ({ count }) => <div style={style}>Obstruction!</div>;
+export default ({ count }) => <div style={style}><div style={{transform: "translateY(-4px)"}}>&#9888;</div></div>;

@@ -16,19 +16,20 @@ export default class SimpleMap extends React.Component {
   };
 
   render() {
-    const sensorsOnMap = this.props.sensors.map(
-      ({ uuid, lat, lng, count }) => (
-        <Sensor key={uuid} lat={lat} lng={lng} count={count} />
-      )
-    );
-    const hazards = this.props.hazards.map(
-      ({ time, lat, lng }) => (
-        <Hazard key={time} lat={lat} lng={lng}/>
-      )
-    );
+    const sensorsOnMap = this.props.sensors.map(({ uuid, lat, lng, count }) => (
+      <Sensor key={uuid} lat={lat} lng={lng} count={count} />
+    ));
+    const hazards = this.props.hazards.map(({ time, lat, lng }) => (
+      <Hazard key={time} lat={lat} lng={lng} />
+    ));
 
     return (
-      <div>
+      <div
+        style={{
+          width: "100vw",
+          height: "calc(100vh - 64px)"
+        }}
+      >
         <GoogleMapReact
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
@@ -41,16 +42,17 @@ export default class SimpleMap extends React.Component {
             this.setState({ map: map, maps: maps, mapLoaded: true });
           }}
           yesIWantToUseGoogleMapApiInternals
-          style={{
-            width: "100vw",
-            height: "calc(100vh - 64px)"
-          }}
         >
           {sensorsOnMap}
           {hazards}
         </GoogleMapReact>
         {this.state.mapLoaded && (
-          <DemoLines map={this.state.map} maps={this.state.maps} traffic={this.props.traffic} hazard={hazards.length > 0} />
+          <DemoLines
+            map={this.state.map}
+            maps={this.state.maps}
+            traffic={this.props.traffic}
+            hazard={hazards.length > 0}
+          />
         )}
       </div>
     );
