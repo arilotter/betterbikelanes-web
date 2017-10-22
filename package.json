@@ -1,0 +1,21 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "6.11.x"
+  },
+  "scripts": {
+    "start": "node server",
+    "heroku-postbuild": "cd frontend && npm i && npm i --only=dev --no-shrinkwrap && npm run build",
+    "dev": "npm-run-all --parallel frontend server",
+    "frontend": "cd frontend && npm start",
+    "server": "cd server && npm start"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "frontend/node_modules"
+  ],
+  "author": "",
+  "license": "ISC"
+}
