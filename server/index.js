@@ -26,16 +26,25 @@ const database = new Proxy(JSON.parse(fs.readFileSync(dbFile)), {
 const app = express();
 app.use(bodyParser.json());
 
-app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
 app.post("/triggered", (req, res) => {
-  if (database[req.body.uuid] === undefined) {
+  if (database.sensors[req.body.uuid] === undefined) {
     res.sendStatus(400);
   } else {
-    database[req.body.uuid].readings.push(new Date().getTime());
+    database.sensors[req.body.uuid].readings.push(new Date().getTime());
     console.log("reading from " + req.body.uuid);
     res.sendStatus(200);
   }
+});
+
+app.post("/hazard", (req, res) => {
+  database.hazards.push({
+    time: new Date().getTime(),
+    lat: 43.658582,
+    lng: -79.396633
+  });
+  res.sendStatus(200);
 });
 
 app.post("/networks", (req, res) => {
@@ -56,7 +65,10 @@ app.post("/networks", (req, res) => {
         console.log(json);
         res.sendStatus(400);
       } else {
-        database[req.body.uuid] = { readings: [], location: json.location };
+        database.sensors[req.body.uuid] = {
+          readings: [],
+          location: json.location
+        };
         console.log("added new device to database: " + req.body.uuid);
         res.sendStatus(200);
       }
@@ -69,8 +81,8 @@ app.get("/database", (req, res) => {
 });
 
 // All remaining requests return the React app, so it can handle routing.
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
 });
 
 app.listen(PORT, () => {

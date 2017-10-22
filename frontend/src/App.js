@@ -9,7 +9,9 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      sensors: []
+      sensors: [],
+      hazards: [],
+      traffic: false
     };
     setInterval(this.refreshSensors.bind(this), 100);
   }
@@ -17,28 +19,32 @@ export default class App extends Component {
     fetch(ENDPOINT)
       .then(res => res.json())
       .then(json => {
-        this.setState({
+        const s = {
           sensors: Object.entries(
-            json
+            json.sensors
           ).map(([key, { location, readings }]) => ({
             uuid: key,
             lat: location.lat,
             lng: location.lng,
-            count: readings.length
+            count: readings.filter(reading => (new Date().getTime() - reading) < 180000 ).length
           }))
-        });
+        };
+        const test = this.s.sensors.filter(s => s.uuid === 'test');
+        if(test.length === 1) {
+          s.traffic = test[0].count > 0;
+        }
+        this.setState(s);
       });
   }
   render() {
     return (
-      <div
-        style={{
-          width: "100vw",
-          height: "calc(100vh - 64px)"
-        }}
-      >
+      <div>
         <Navbar />
-        <Map sensors={this.state.sensors} />
+        <Map
+          sensors={this.state.sensors}
+          traffic={this.state.traffic}
+          hazards={this.state.hazards}
+        />
       </div>
     );
   }
